@@ -32,6 +32,8 @@ jobs:
       - name: Black Duck Security Scan
         id: black-duck-security-scan
         uses: blackduck-inc/black-duck-security-scan@v2
+        env: 
+          BLACKDUCK_TRUST_CERT: true
         with:
           ### SCANNING: Required fields
           blackducksca_url: ${{ vars.BLACKDUCKSCA_URL }}
@@ -44,3 +46,13 @@ jobs:
           blackducksca_externalIssues_create: true
           ### SARIF report parameters
           blackducksca_reports_sarif_create: true  # Create SARIF report and upload it as artifact
+
+
+          ### SCAN CONFIGURATION: Uncomment below to enable
+          # blackducksca_waitForScan: true # Wait for scan completion before proceeding
+
+          ### Mark build status if policy violating issues are found
+          # mark_build_status: failure # Set to success, failure, or skip
+
+          ### Uncomment below configuration if Bridge diagnostic files needs to be uploaded
+          # include_diagnostics: false
